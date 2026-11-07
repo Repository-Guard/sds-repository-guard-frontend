@@ -24,3 +24,15 @@ th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--lin
 .repo { display: flex; gap: 10px; align-items: center; padding: 6px 0; } .event { font-size: .9rem; margin: 2px 0; }
 @media (max-width: 640px) { .eval, .alert { flex-direction: column; align-items: flex-start; } .clock { text-align: left; align-items: flex-start; } table { display: block; overflow-x: auto; } }
 @media (prefers-reduced-motion: no-preference) { button { transition: background-color .15s; } }
+.traffic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.tcard { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 14px 16px; display: flex; flex-direction: column; gap: 12px; }
+.tcard.warn { border-color: var(--amber); }
+.tcard-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.tcard-head h3 { word-break: break-word; }
+.badge { font-size: .78rem; font-weight: 600; padding: 2px 8px; border: 1px solid currentColor; border-radius: 999px; white-space: nowrap; }
+.badge.ok { color: var(--green); } .badge.warn { color: var(--amber); } .badge.idle { color: #55616e; }
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 0; }
+.stats dt { font-size: .85rem; color: #55616e; }
+.stats dd { margin: 0; font-size: 1.8rem; line-height: 1.1; font-weight: 700; font-variant-numeric: tabular-nums; }
+.stats span { font-size: .85rem; color: #55616e; }
+.tcard-foot { margin: 0; padding-top: 8px; border-top: 1px solid var(--line); font-size: .82rem; color: #55616e; }

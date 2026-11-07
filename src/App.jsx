@@ -148,6 +148,31 @@ export default function App() {
 
       <section>
         <h2>Compteurs de clones et de vues</h2>
+        {overview.traffic_summary.length === 0 && <p className="muted">Aucun dépôt coché.</p>}
+        <div className="traffic-grid">
+          {overview.traffic_summary.map((t) => {
+            const [org, name] = t.full_name.split('/');
+            const polled = Boolean(t.at);
+            const watch = polled && t.clones > 0;
+            return (
+              <article key={t.full_name} className={'tcard' + (watch ? ' warn' : '')}>
+                <div className="tcard-head">
+                  <div><h3>{name}</h3><span className="muted">{org}</span></div>
+                  <span className={'badge ' + (!polled ? 'idle' : watch ? 'warn' : 'ok')}>
+                    {!polled ? 'Pas encore relevé' : watch ? 'Clones à corréler' : 'Aucune activité'}
+                  </span>
+                </div>
+                {polled && (
+                  <dl className="stats">
+                    <div><dt>Clones</dt><dd>{t.clones}</dd><span>{t.clone_uniques} unique(s)</span></div>
+                    <div><dt>Vues</dt><dd>{t.views}</dd><span>{t.view_uniques} unique(s)</span></div>
+                  </dl>
+                )}
+                <p className="tcard-foot">{polled ? 'Fenêtre glissante de 14 jours. Relevé du ' + when(t.at) + '.' : 'Lancez guard:poll-traffic.'}</p>
+              </article>
+            );
+          })}
+        </div>
         <table>
           <thead><tr><th>Dépôt</th><th>Jour</th><th>Clones</th><th>Vues</th></tr></thead>
           <tbody>
